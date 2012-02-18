@@ -1,0 +1,1 @@
+Stupid simple sample on how to use this little `AssetsHelper` class in your ASP.NET MVC application.
