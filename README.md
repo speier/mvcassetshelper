@@ -1,3 +1,5 @@
+## MVC Assets Helper
+
 Stupid simple sample on how to use the little `AssetsHelper` class in your ASP.NET MVC application.
 
 ## License
