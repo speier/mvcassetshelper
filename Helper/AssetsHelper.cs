@@ -15,7 +15,7 @@ namespace System.Web.Mvc
     {
         public static AssetsHelper GetInstance(HtmlHelper htmlHelper)
         {
-            var instanceKey = "AssetsHelperInstance";
+            var instanceKey = "48F2764A-6898-450E-99F8-1EF0B912ED03";
 
             var context = htmlHelper.ViewContext.HttpContext;
             if (context == null) return null;
