@@ -1,6 +1,25 @@
 ## MVC Assets Helper
 
-Stupid simple sample on how to use the little `AssetsHelper` class in your ASP.NET MVC application.
+Lightweight assets helper for ASP.NET MVC
+
+## Usage
+
+Register your assets in any View or PartialView:
+
+    @{
+        Html.Assets().Styles.Add("/Dashboard/Content/Dashboard.css");
+        Html.Assets().Scripts.Add("/Dashboard/Scripts/Dashboard.js");
+    }
+
+Render your assets in the Layout page:
+
+    <head>
+        @Html.Assets().Styles.Render()
+    </head>
+    <body>
+        ...
+        @Html.Assets().Scripts.Render()
+    </body>
 
 ## License
 
