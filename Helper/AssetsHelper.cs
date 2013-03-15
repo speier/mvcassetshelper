@@ -30,11 +30,13 @@ namespace System.Web.Mvc
 
         public ItemRegistrar Styles { get; private set; }
         public ItemRegistrar Scripts { get; private set; }
+		public ItemRegistrar InlineScripts { get; private set; }
 
         public AssetsHelper()
         {
             Styles = new ItemRegistrar(ItemRegistrarFormatters.StyleFormat);
             Scripts = new ItemRegistrar(ItemRegistrarFormatters.ScriptFormat);
+			InlineScripts = new ItemRegistrar(ItemRegistrarFormatters.InlineScripts);
         }
     }
 
@@ -52,7 +54,7 @@ namespace System.Web.Mvc
         public ItemRegistrar Add(string url)
         {
             if (!_items.Contains(url))
-                _items.Insert(0, url);
+                _items.Add(url);
 
             return this;
         }
@@ -75,5 +77,6 @@ namespace System.Web.Mvc
     {
         public const string StyleFormat = "<link href=\"{0}\" rel=\"stylesheet\" type=\"text/css\" />";
         public const string ScriptFormat = "<script src=\"{0}\" type=\"text/javascript\"></script>";
+		public const string InlineScripts = "<script type=\"text/javascript\">{0}</script>";
     }
 }
