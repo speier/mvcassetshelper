@@ -1,6 +1,14 @@
 ## MVC Assets Helper
 
-Lightweight assets helper for ASP.NET Core MVC
+Lightweight assets helper for ASP.NET MVC
+
+## Run example
+
+```
+$ bower install
+$ dotnet restore
+$ dotnet run
+```
 
 ## Usage
 
