@@ -1,14 +1,14 @@
 ## MVC Assets Helper
 
-Lightweight assets helper for ASP.NET MVC
+Lightweight assets helper for ASP.NET Core MVC
 
 ## Usage
 
 Register your assets in any View or PartialView:
 
     @{
-        Html.Assets().Styles.Add("/Dashboard/Content/Dashboard.css");
-        Html.Assets().Scripts.Add("/Dashboard/Scripts/Dashboard.js");
+        Html.Assets().Styles.Add("~/css/dashboard.css");
+        Html.Assets().Scripts.Add("~/js/dashboard.js");
     }
 
 Render your assets in the Layout page:
@@ -23,6 +23,6 @@ Render your assets in the Layout page:
 
 ## License
 
-Copyright 2012 Kalman Speier
+Copyright (c) Kalman Speier
 
-Licensed under the MIT License: http://www.opensource.org/licenses/mit-license.php
+Licensed under the MIT License: https://opensource.org/licenses/MIT

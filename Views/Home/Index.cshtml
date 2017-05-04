@@ -1,8 +1,10 @@
 ﻿@{
-    ViewBag.Title = "Example";
-    Html.Assets().Styles.Add("/Content/app.css");
-    Html.Assets().Scripts.Add("/Scripts/app.js");
+    ViewData["Title"] = "Home";
+
+    Html.Assets().Styles.Add("~/css/home.css");
+    Html.Assets().Scripts.Add("~/js/home.js");
 }
+
 <h2>
     Example
 </h2>
@@ -16,6 +18,7 @@
 </p>
 <div id="example">
 </div>
+
 @{
 	Html.Assets().InlineScripts.Add("console.log('inline script #1');");
 	Html.Assets().InlineScripts.Add("console.log('inline script #2');");

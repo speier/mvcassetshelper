@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace System.Web.Mvc
+namespace AssetsHelper
 {
     public static class HtmlHelperExtensions
     {
-        public static AssetsHelper Assets(this HtmlHelper htmlHelper)
+        public static AssetsHelper Assets(this IHtmlHelper htmlHelper)
         {
             return AssetsHelper.GetInstance(htmlHelper);
         }
@@ -13,32 +15,34 @@ namespace System.Web.Mvc
 
     public class AssetsHelper
     {
-        public static AssetsHelper GetInstance(HtmlHelper htmlHelper)
+        public static AssetsHelper GetInstance(IHtmlHelper htmlHelper)
         {
-            var instanceKey = "48F2764A-6898-450E-99F8-1EF0B912ED03";
+            var instanceKey = "3A570A97-40C4-411C-999B-1CEBC92D8FEF";
 
             var context = htmlHelper.ViewContext.HttpContext;
             if (context == null) return null;
 
             var assetsHelper = (AssetsHelper)context.Items[instanceKey];
 
-            if (assetsHelper == null)
-                context.Items.Add(instanceKey, assetsHelper = new AssetsHelper());
+            if (assetsHelper == null) {
+                assetsHelper = new AssetsHelper();
+                context.Items.Add(instanceKey, assetsHelper);
+            }
 
             return assetsHelper;
         }
 
         public ItemRegistrar Styles { get; private set; }
         public ItemRegistrar Scripts { get; private set; }
-	public ItemRegistrar InlineScripts { get; private set; }
-	public ItemRegistrar InlineStyles { get; private set; }	
+    	public ItemRegistrar InlineScripts { get; private set; }
+	    public ItemRegistrar InlineStyles { get; private set; }	
 
         public AssetsHelper()
         {
             Styles = new ItemRegistrar(ItemRegistrarFormatters.StyleFormat);
             Scripts = new ItemRegistrar(ItemRegistrarFormatters.ScriptFormat);
-	    InlineScripts = new ItemRegistrar(ItemRegistrarFormatters.InlineScripts);
-	    InlineStyles = new ItemRegistrar(ItemRegistrarFormatters.InlineStyles);
+	        InlineScripts = new ItemRegistrar(ItemRegistrarFormatters.InlineScripts);
+	        InlineStyles = new ItemRegistrar(ItemRegistrarFormatters.InlineStyles);
         }
     }
 
@@ -61,17 +65,23 @@ namespace System.Web.Mvc
             return this;
         }
 
-        public IHtmlString Render()
+        public IHtmlContent Render()
         {
             var sb = new StringBuilder();
 
             foreach (var item in _items)
             {
-                var fmt = string.Format(_format, item);
-                sb.AppendLine(fmt);
+                var val = string.Format(_format, EnsureAbsoltute(item));
+                sb.AppendLine(val);
             }
 
             return new HtmlString(sb.ToString());
+        }
+
+        private string EnsureAbsoltute(string item) {
+            return item.StartsWith("~")
+                ? item.Substring(1)
+                : item;
         }
     }
 
@@ -79,7 +89,7 @@ namespace System.Web.Mvc
     {
         public const string StyleFormat = "<link href=\"{0}\" rel=\"stylesheet\" type=\"text/css\" />";
         public const string ScriptFormat = "<script src=\"{0}\" type=\"text/javascript\"></script>";
-	public const string InlineScripts = "<script type=\"text/javascript\">{0}</script>";
-	public const string InlineStyles = "<style type=\"text/css\">{0}</style>";
+	    public const string InlineScripts = "<script type=\"text/javascript\">{0}</script>";
+	    public const string InlineStyles = "<style type=\"text/css\">{0}</style>";
     }
 }
