@@ -1,33 +1,14 @@
 ## MVC Assets Helper
 
-Lightweight assets helper for ASP.NET MVC
+Lightweight assets helper for ASP.NET MVC, nuget package.
 
-## Run example
+## Package and deploy
 
 ```
-$ bower install
 $ dotnet restore
-$ dotnet run
+$ dotnet pack
+$ dotnet nuget push bin/debug/*.nupkg -s https://www.nuget.org/api/v2/package -k <apikey>
 ```
-
-## Usage
-
-Register your assets in any View or PartialView:
-
-    @{
-        Html.Assets().Styles.Add("~/css/dashboard.css");
-        Html.Assets().Scripts.Add("~/js/dashboard.js");
-    }
-
-Render your assets in the Layout page:
-
-    <head>
-        @Html.Assets().Styles.Render()
-    </head>
-    <body>
-        ...
-        @Html.Assets().Scripts.Render()
-    </body>
 
 ## License
 
